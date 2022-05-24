@@ -11,25 +11,32 @@ namespace SelfBalancedTree
         public int value;
         public TreeNode? left;
         public TreeNode? right;
-        private int height { get { return Math.Max(this.left == null ? 0 : this.left.height + 1, this.right == null ? 0 : this.right.height + 1); } }
+        public int height { get { return Math.Max(this.left == null ? 1 : this.left.height + 1, this.right == null ? 1 : this.right.height + 1); } }
 
-        private int balancedFactor { get { return (this.left?.height ?? 0) - (this.right?.height ?? 0); } }
+        public int balanceFactor { get { return (this.left?.height ?? 0) - (this.right?.height ?? 0); } }
 
         public static void balance(ref TreeNode node)
         {
-            if (node.balancedFactor < -1)
+            if (node.balanceFactor < -1)
             {
-                rotateRight(ref node);
+                if (node.right!.balanceFactor > 1)
+                {
+                    rotateRightLeft(ref node);
+                }
+                else
+                {
+                    rotateLeft(ref node);
+                }
             }
-            if (node.balancedFactor > 1)
-            {
-                rotateLeft(ref node);
-            }
-        }
-
-        public void checkBalancedFactorAndBalance()
-        {
-
+            if (node.balanceFactor > 1)
+                if (node.left!.balanceFactor < -1)
+                {
+                    rotateLeftRight(ref node);
+                }
+                else
+                {
+                    rotateRight(ref node);
+                }
         }
 
         public void insert(int value)
@@ -90,7 +97,7 @@ namespace SelfBalancedTree
         {
             var buff = root;
             root = buff.left!;
-            buff.left = null;
+            buff.left = root.right;
             root!.right = buff;
         }
 
@@ -98,9 +105,30 @@ namespace SelfBalancedTree
         {
             var buff = root;
             root = buff.right!;
-            buff.right = null;
+            buff.right = root.left;
             root!.left = buff;
         }
+
+        public void rotateLeft()
+        {
+            // var buff = this;
+            // this = buff.right!;
+            // buff.right = root.left;
+            // root!.left = buff;
+        }
+
+        public static void rotateRightLeft(ref TreeNode root)
+        {
+            rotateRight(ref root.right!);
+            rotateLeft(ref root);
+        }
+
+        public static void rotateLeftRight(ref TreeNode root)
+        {
+            rotateLeft(ref root.left!);
+            rotateRight(ref root);
+        }
+
 
     }
 

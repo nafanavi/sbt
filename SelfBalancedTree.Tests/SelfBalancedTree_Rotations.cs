@@ -29,4 +29,28 @@ public class SelfBalancedTree_Rotations
         Assert.True(root.value == 0);
         Assert.True(root.right?.value == 1);
     }
+
+    [Fact]
+    public void Check_Right_Left_Rotation()
+    {
+        var rightLeft = new TreeNode(0, null, null);
+        var right = new TreeNode(1, rightLeft, null);
+        var root = new TreeNode(-1, null, right);
+        TreeNode.rotateRightLeft(ref root);
+        Assert.True(root.left?.value == -1);
+        Assert.True(root.value == 0);
+        Assert.True(root.right?.value == 1);
+    }
+
+    [Fact]
+    public void Check_Left_Right_Rotation()
+    {
+        var leftRight = new TreeNode(0, null, null);
+        var left = new TreeNode(-1, null, leftRight);
+        var root = new TreeNode(1, left, null);
+        TreeNode.rotateLeftRight(ref root);
+        Assert.True(root.left?.value == -1);
+        Assert.True(root.value == 0);
+        Assert.True(root.right?.value == 1);
+    }
 }
