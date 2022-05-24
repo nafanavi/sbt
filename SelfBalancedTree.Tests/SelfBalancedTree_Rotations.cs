@@ -12,7 +12,7 @@ public class SelfBalancedTree_Rotations
         var leftLeft = new TreeNode(-1, null, null);
         var left = new TreeNode(0, leftLeft, null);
         var root = new TreeNode(1, left, null);
-        TreeNode.rotateRight(ref root);
+        root = SBT_Actions.rotateRight(root);
         Assert.True(root.left?.value == -1);
         Assert.True(root.value == 0);
         Assert.True(root.right?.value == 1);
@@ -24,7 +24,7 @@ public class SelfBalancedTree_Rotations
         var rightRight = new TreeNode(1, null, null);
         var right = new TreeNode(0, null, rightRight);
         var root = new TreeNode(-1, null, right);
-        TreeNode.rotateLeft(ref root);
+        root = SBT_Actions.rotateLeft(root);
         Assert.True(root.left?.value == -1);
         Assert.True(root.value == 0);
         Assert.True(root.right?.value == 1);
@@ -36,8 +36,8 @@ public class SelfBalancedTree_Rotations
         var rightLeft = new TreeNode(0, null, null);
         var right = new TreeNode(1, rightLeft, null);
         var root = new TreeNode(-1, null, right);
-        TreeNode.rotateRightLeft(ref root);
-        Assert.True(root.left?.value == -1);
+        root = SBT_Actions.rotateRightLeft(root);
+        Assert.True(root.left?.value == -1, root.value.ToString());
         Assert.True(root.value == 0);
         Assert.True(root.right?.value == 1);
     }
@@ -48,7 +48,7 @@ public class SelfBalancedTree_Rotations
         var leftRight = new TreeNode(0, null, null);
         var left = new TreeNode(-1, null, leftRight);
         var root = new TreeNode(1, left, null);
-        TreeNode.rotateLeftRight(ref root);
+        root = SBT_Actions.rotateLeftRight(root);
         Assert.True(root.left?.value == -1);
         Assert.True(root.value == 0);
         Assert.True(root.right?.value == 1);

@@ -21,7 +21,7 @@ public class SelfBalancedTree_Balance
         var leftLeft = new TreeNode(-1, null, null);
         var left = new TreeNode(0, leftLeft, null);
         var root = new TreeNode(1, left, null);
-        TreeNode.balance(ref root);
+        root = SBT_Actions.balance(root);
         Action<TreeNode?> checkBalancedFactor = null;
         checkBalancedFactor = (TreeNode? node) =>
         {

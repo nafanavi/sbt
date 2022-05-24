@@ -13,7 +13,7 @@ public class SelfBalancedTree_Insertion
     {
         var root = new TreeNode(nodeVal - 1, null, null);
         var node = new TreeNode(nodeVal, null, null);
-        root.insert(node);
+        root = SBT_Actions.insert(root, node);
         Assert.True(root.right == node);
         Assert.True(root.left == null);
     }
@@ -24,7 +24,7 @@ public class SelfBalancedTree_Insertion
     {
         var root = new TreeNode(nodeVal + 1, null, null);
         var node = new TreeNode(nodeVal, null, null);
-        root.insert(node);
+        root = SBT_Actions.insert(root, node);
         Assert.True(root.left == node);
         Assert.True(root.right == null);
     }
@@ -37,7 +37,7 @@ public class SelfBalancedTree_Insertion
         var right = new TreeNode(nodeVal + 3, null, null);
         var root = new TreeNode(nodeVal + 2, left, right);
         var node = new TreeNode(nodeVal, null, null);
-        root.insert(node);
+        root = SBT_Actions.insert(root, node);
         Assert.True(root.left?.left == node);
         Assert.True(root.right?.right == null);
     }
@@ -50,7 +50,7 @@ public class SelfBalancedTree_Insertion
         var right = new TreeNode(nodeVal - 1, null, null);
         var root = new TreeNode(nodeVal - 2, left, right);
         var node = new TreeNode(nodeVal, null, null);
-        root.insert(node);
+        root = SBT_Actions.insert(root, node);
         Assert.True(root.left?.left == null);
         Assert.True(root.right?.right == node);
     }

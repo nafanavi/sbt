@@ -1,9 +1,9 @@
 namespace SelfBalancedTree
 {
 
-    public class SBT_Actions
+    public static class SBT_Actions
     {
-        public TreeNode balance(TreeNode node)
+        public static TreeNode balance(TreeNode node)
         {
             if (node.balanceFactor < -1)
             {
@@ -30,7 +30,7 @@ namespace SelfBalancedTree
             return node;
         }
 
-        public TreeNode insert(TreeNode root, int value)
+        public static TreeNode insert(TreeNode root, int value)
         {
             if (value > root.value)
             {
@@ -58,7 +58,7 @@ namespace SelfBalancedTree
             return root;
         }
 
-        public TreeNode insert(TreeNode root, TreeNode newNode)
+        public static TreeNode insert(TreeNode root, TreeNode newNode)
         {
             if (newNode.value > root.value)
             {
@@ -86,7 +86,7 @@ namespace SelfBalancedTree
             return balance(root);
         }
 
-        public TreeNode rotateRight(TreeNode node)
+        public static TreeNode rotateRight(TreeNode node)
         {
             var buff = node;
             node = buff.left!;
@@ -95,7 +95,7 @@ namespace SelfBalancedTree
             return node;
         }
 
-        public TreeNode rotateLeft(TreeNode node)
+        public static TreeNode rotateLeft(TreeNode node)
         {
             var buff = node;
             node = buff.right!;
@@ -104,15 +104,15 @@ namespace SelfBalancedTree
             return node;
         }
 
-        public TreeNode rotateRightLeft(TreeNode node)
+        public static TreeNode rotateRightLeft(TreeNode node)
         {
-            node = rotateRight(node.right!);
+            node.right = rotateRight(node.right!);
             return rotateLeft(node);
         }
 
-        public TreeNode rotateLeftRight(TreeNode node)
+        public static TreeNode rotateLeftRight(TreeNode node)
         {
-            node = rotateLeft(node.left!);
+            node.left = rotateLeft(node.left!);
             return rotateRight(node);
         }
     }
