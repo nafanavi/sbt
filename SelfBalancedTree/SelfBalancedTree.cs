@@ -55,7 +55,7 @@ namespace SelfBalancedTree
                     root.left = new TreeNode(value, null, null);
                 }
             }
-            return root;
+            return balance(root);
         }
 
         public static TreeNode insert(TreeNode root, TreeNode newNode)
