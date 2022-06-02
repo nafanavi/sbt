@@ -54,4 +54,27 @@ public class SelfBalancedTree_Insertion
         Assert.True(root.left?.left == null);
         Assert.True(root.right?.right == node);
     }
+
+    [Fact]
+    public void Should_Be_Balanced_After_Insertion()
+    {
+        var root = new TreeNode(-1, null, null);
+        root = SBT_Actions.Insert(root, 2);
+        root = SBT_Actions.Insert(root, 3);
+        Assert.True(root.left?.value == -1);
+        Assert.True(root.value == 2);
+        Assert.True(root.right?.value == 3);
+    }
+
+    // [Fact]
+    // public void Should_Be_Balanced_After_Insertion()
+    // {
+    //     var rightRight = new TreeNode(1, null, null);
+    //     var right = new TreeNode(0, null, rightRight);
+    //     var root = new TreeNode(-1, null, right);
+    //     root = SBT_Actions.Insert(root, right);
+    //     Assert.True(root.left?.value == -1);
+    //     Assert.True(root.value == 0);
+    //     Assert.True(root.right?.value == 1);
+    // }
 }
