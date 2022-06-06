@@ -1,23 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Forms;
 using SelfBalancedTree;
 using TreeNode = SelfBalancedTree.TreeNode;
-using System.Drawing;
 using Point = System.Windows.Point;
-using System.Diagnostics;
 
 namespace WpfApp1
 {
@@ -26,16 +13,7 @@ namespace WpfApp1
     /// </summary>
     /// 
 
-    public class NodePositionParameters
-    {
-        double diffX;
-        double diffY;
-        public NodePositionParameters(double diffX, double diffY)
-        {
-            this.diffX = diffX;
-            this.diffY = diffY;
-        }
-    }
+
     public partial class MainWindow : Window
     {
         private Point rootCoord;
@@ -93,12 +71,6 @@ namespace WpfApp1
             MyCanvas.Children.Add(line);
         }
 
-        //private Point CalcNodePosition(Point parentNodeCoord)
-        //{
-        //    var spreadingKoeff = rootCoord.Y / parentNodeCoord.Y;
-        //    var nodeX = parentNodeCoord.X * spreadingKoeff;
-        //}
-
         private void DrawTree(TreeNode node, Point nodeCoords)
         {
             if (node != null)
@@ -107,14 +79,14 @@ namespace WpfApp1
                 DrawLabel(node.value.ToString(), nodeCoords);
                 var spreadingFactor = rootCoord.Y / nodeCoords.Y;
                 var nodeDeltaX = initialNodesDistanceX * spreadingFactor;
-                var nodesDistance = Math.Sqrt(nodeDeltaX * nodeDeltaX + initialNodesDistanceY * initialNodesDistanceY);
+                var nodeDeltaY = initialNodesDistanceY;
+                var nodesDistance = Math.Sqrt(nodeDeltaX * nodeDeltaX + nodeDeltaY * nodeDeltaY);
                 var lineDeltaX = circleRadius * nodeDeltaX / nodesDistance;
-                var lineDeltaY = circleRadius * initialNodesDistanceY / nodesDistance;
+                var lineDeltaY = circleRadius * nodeDeltaY / nodesDistance;
                 if (node.left != null)
                 {
                     var leftNodeX = nodeCoords.X - nodeDeltaX;
-                    var leftNodeY = nodeCoords.Y + initialNodesDistanceY;
-                    Trace.WriteLine(nodeDeltaX);
+                    var leftNodeY = nodeCoords.Y + nodeDeltaY;
                     DrawLine(
                         new Point(nodeCoords.X - lineDeltaX, nodeCoords.Y + lineDeltaY),
                         new Point(leftNodeX + lineDeltaX, leftNodeY - lineDeltaY)
